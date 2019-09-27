@@ -3,11 +3,11 @@ class ProductWorker
   sidekiq_options retry: false
   require 'csv'
   def perform(filepath)
-    CSV.foreach(filepath, headers: true) do |product|
-      Product.create(
-        name: product[0],
-        price: product[1],
-        description: product[2])
+    if File.exist?(filepath)
+      CSV.foreach(filepath, headers: true) do |product_row|
+        Product.create(product_row.to_h)
+      end
+      File.delete(filepath)
     end
   end
 end

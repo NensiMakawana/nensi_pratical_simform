@@ -1,9 +1,9 @@
 <p id="notice"><%= notice %></p>
 <%= form_tag import_products_path, multipart: true do %>
-  <%= file_field_tag :file %>
+  <%= file_field_tag :file, accept: '.csv' %>
   <%= submit_tag "Import" %>
 <% end %>
-
+<%= link_to 'SampleCsv', download_csv_products_path(format: 'csv') %>
 <h1>Products</h1>
 <table>
   <thead>

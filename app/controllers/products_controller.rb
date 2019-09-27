@@ -1,4 +1,5 @@
 class ProductsController < ApplicationController
+  require 'csv'
   before_action :authenticate_user!
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
@@ -63,9 +64,21 @@ class ProductsController < ApplicationController
   end
 
   def import
-    ProductWorker.perform_async(params[:file].path)
-    flash[:notice] = "Products getting added to db"
-    redirect_to products_path
+    if params[:file].present?
+      copy_file_name = "#{Time.now.to_f}_#{params[:file].original_filename}"
+      FileUtils.cp(params[:file].tempfile.path, copy_file_name)
+      ProductWorker.perform_async(copy_file_name)
+      flash[:notice] = "Products getting added to db"
+      redirect_to products_path
+    else
+      redirect_to products_path, notice: 'Select CSV file.'     
+    end
+  end
+
+  def download_csv
+    send_file("#{Rails.root}/public/sample.csv",
+          filename: "sample.csv",
+          type: "text/csv", disposition: "attachment")
   end
 
   private

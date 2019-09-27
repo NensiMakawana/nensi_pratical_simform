@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :products do
     collection do
       post 'import'
+      get 'download_csv'
     end
   end
   devise_scope :user do
@@ -11,6 +12,13 @@ Rails.application.routes.draw do
     end
     unauthenticated :user do
       root :to => 'devise/sessions#new', as: :unauthenticated_root
+    end
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :products
+      post '/login', to: 'sessions#create'
     end
   end
   # The priority is based upon order of creation: first created -> highest priority.
