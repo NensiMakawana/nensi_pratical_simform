@@ -1,28 +1,21 @@
-== README
+== ProductManagement
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This application is for product management.
 
-Things you may want to cover:
+*Prerequisites*
+* Ruby(2.6.2)
+* Rails(5.2.3)
+* redis-server
 
-* Ruby version
+*Installation*
 
-* System dependencies
+First clone the project repository from github.
 
-* Configuration
+* Install [rvm](https://rvm.io/rvm/install).
+* Then go to project directory and run 'bundle install'
+* Install [redi-server](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-18-04)
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+*RunApplication*
+* rails s
+* redis-server
+* bundle exce sidekiq
