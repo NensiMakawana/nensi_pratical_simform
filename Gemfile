@@ -38,7 +38,7 @@ gem 'devise', '4.7.1'
 
 gem 'bootstrap', '4.3.1'
 
-gem 'sidekiq', '3.0'
+gem 'sidekiq', '5.2.0'
 
 gem 'roo'
 
